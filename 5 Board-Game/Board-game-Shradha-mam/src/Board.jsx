@@ -2,11 +2,17 @@ import { useState } from "react";
 import "./Board.css";
 function Board() {
   let [moves, setMoves] = useState({ blue: 0, yellow: 0, green: 0, red: 0 });
+  let [arr, setArr] = useState(["No Moves"]);
 
   let updateBlue = () => {
     setMoves((prevMove) => {
-        return  ({...prevMove, blue: prevMove.blue + 1 });
+      return { ...prevMove, blue: prevMove.blue + 1 };
     });
+
+    arr.push("blue moves");
+    setArr(arr);
+    console.log(arr);
+    
   };
   return (
     <>
