@@ -20,8 +20,21 @@ function Todo() {
 
   let deleteTodo = (id) => {
     setTask((prevTodo) => task.filter((prevTodo) => prevTodo.id != id));
-    
   };
+
+  let upperCaseAll = () => {
+    setTask((prevTodo) =>
+      prevTodo.map((todo) => {
+        let word = todo.createTask;
+        return {
+          ...todo,
+          createTask: word.charAt(0).toUpperCase() + word.slice(1),
+          // setTask(word.charAt(0).toUpperCase() + word.slice(1));
+        };
+      })
+    );
+  };
+
 
   return (
     <>
@@ -47,17 +60,33 @@ function Todo() {
             <li key={newTask.id}>
               {newTask.createTask}
               &nbsp; &nbsp;
-              <button
+              {/* <button
                 type="button"
                 className="btn btn-outline-secondary"
+                onClick={upperCaseOne}
+              >
+                In standard form
+              </button> */}
+              &nbsp; &nbsp;
+              <button
+                type="button"
+                className="btn btn-outline-danger"
                 onClick={() => deleteTodo(newTask.id)}
               >
                 Delete
               </button>
+              
             </li>
           );
         })}
       </ul>
+      <button
+        type="button"
+        className="btn btn-outline-secondary"
+        onClick={upperCaseAll}
+      >
+        All in standard form
+      </button>
     </>
   );
 }
