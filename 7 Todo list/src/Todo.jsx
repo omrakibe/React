@@ -10,7 +10,10 @@ function Todo() {
   let todoTask = () => {
     // task.push(newTodo);
     setTask((prevTask) => {
-      return [{ createTask: newTodo, id: uuidv4() }, ...prevTask];
+      return [
+        { createTask: newTodo, id: uuidv4(), isDone: false },
+        ...prevTask,
+      ];
     });
     setNewTodo("");
     // console.log(newTodo);
@@ -30,20 +33,27 @@ function Todo() {
         let word = todo.createTask;
         return {
           ...todo,
-          createTask: word.charAt(0).toUpperCase() + word.slice(1),
+          isDone: true,
           // setTask(word.charAt(0).toUpperCase() + word.slice(1));
         };
       })
     );
   };
 
-  let upperCaseOne = (id) => {
-
-    let updatedTask = task.map(task.id === id ? {...task, isDone: !task.isDone} : task)
-    console.log(updatedTask);
-    
-  }
-
+  let markAsDone = (id) => {
+    setTask((prevTodo) =>
+      prevTodo.map((todo) => {
+        if (todo.id == id) {
+          return {
+            ...todo,
+            isDone: true,
+          };
+        } else {
+          return todo;
+        }
+      })
+    );
+  };
   return (
     <>
       <h1>
@@ -65,13 +75,21 @@ function Todo() {
       <ul>
         {task.map((newTask) => {
           return (
-            <li key={newTask.id}>
-              {newTask.createTask}
+            <li style={{margin: "6px"}} key={newTask.id}>
+              <span
+                style={
+                  newTask.isDone == true
+                    ? { textDecoration: "line-through" }
+                    : { textDecoration: "None" }
+                }
+              >
+                {newTask.createTask}
+              </span>
               &nbsp; &nbsp;
               <button
                 type="button"
                 className="btn btn-outline-secondary"
-                onClick={() => upperCaseOne(newTask.id)}
+                onClick={() => markAsDone(newTask.id)}
               >
                 Marks as Done
               </button>
