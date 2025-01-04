@@ -1,0 +1,7 @@
+.ticket {
+    border: 2px solid rgba(231, 221, 221, 0.548);
+    border-radius: 2rem;
+    width: 20rem;
+    margin: 1rem;
+    padding: 1rem;
+}

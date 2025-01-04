@@ -1,13 +1,24 @@
 import { useState } from "react";
+import { genTicket } from "./helper";
+import Ticket from "./Ticket";
+import Button from "./Button";
 
-function Lottery() {
-  let [Num, setNum] = useState([0, 0, 0]);
-  
+function Lottery({n=3, winCondition}) {
+  let [Num, setNum] = useState(genTicket(n));
+  let isWinning = winCondition(Num);
+
+  let random = () => {
+    setNum(genTicket(n));
+  };
+
   return (
     <>
-      <h1>A Lottery Game</h1>
-      <h3>Lottery Ticket Number = {`${Num[0]}${Num[1]}${Num[2]}`}</h3>
-      <button >Generate New Ticket</button>
+      <h1>Lottery Game!</h1>
+      <Ticket ticket={Num} />
+
+      <h2>{isWinning && "Congratuations, You won Lottery!!"}</h2>
+      <Button action={random}/>
+    
     </>
   );
 }
