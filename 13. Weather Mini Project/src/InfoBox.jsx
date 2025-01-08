@@ -2,14 +2,20 @@ import Card from "@mui/material/Card";
 
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
+import ThunderstormIcon from '@mui/icons-material/Thunderstorm';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
 
-import Typography from "@mui/material/Typography";
 import "./InfoBox.css";
 
 function InfoBox({ info }) {
+
+  let icon = info.humidity > 80 ? <ThunderstormIcon /> : info.temp > 25 ? <WbSunnyIcon/> : <AcUnitIcon/>;
+
   return (
     <>
       <h1>Weather Info - {info.weather}</h1>
+      
       <div className="cardCont">
         <Card sx={{ maxWidth: 345 }}>
           <CardMedia
@@ -20,6 +26,8 @@ function InfoBox({ info }) {
           <CardContent>
             
               {info.city}
+              &nbsp;
+              {icon}
             
             
               <p>Temprature = {info.temp}&deg;C</p>
